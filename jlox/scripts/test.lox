@@ -1,6 +1,2 @@
-fun comma(a, b) {
-  print a;
-  print b;
-}
-
-comma(6, 7);
+print true ? 1 : 2;
+print false ? 1 : 2;

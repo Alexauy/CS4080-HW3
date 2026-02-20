@@ -208,6 +208,15 @@ class AstPrinter implements Expr.Visitor<String>, Stmt.Visitor<String> {
   public String visitVariableExpr(Expr.Variable expr) {
     return expr.name.lexeme;
   }
+
+  @Override
+  public String visitConditionalExpr(Expr.Conditional expr){
+      return parenthesize("?:",
+              expr.condition,
+              expr.thenBranch,
+              expr.elseBranch);
+  }
+
 //< Statements and State omit
 //< visit-methods
 //> print-utilities

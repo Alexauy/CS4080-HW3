@@ -329,6 +329,15 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
     return null;
   }
 //< visit-variable-expr
+
+    @Override
+    public Void visitConditionalExpr(Expr.Conditional expr){
+      resolve(expr.condition);
+      resolve(expr.thenBranch);
+      resolve(expr.elseBranch);
+      return null;
+    }
+
 //> resolve-stmt
   private void resolve(Stmt stmt) {
     stmt.accept(this);

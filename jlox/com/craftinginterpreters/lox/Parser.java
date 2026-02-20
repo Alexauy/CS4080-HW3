@@ -53,12 +53,25 @@ class Parser {
 */
 //> Statements and State expression
     //return assignment();
-      return comma();
+      //return comma();
+      return conditional();
 //< Statements and State expression
   }
 //< expression
+//STUDENT inserted ternary support for challenge 6.2
+    private Expr conditional(){
+      Expr expr = equality();
 
-//STUDENT inserted comma support for challenge 6
+      if(match(QUESTION)){
+          Expr thenBranch = expression();
+          consume(COLON,
+                  "Expect ':' after then branch of conditional expression.");
+          Expr elseBranch = conditional();
+          expr = new Expr.Conditional(expr, thenBranch, elseBranch);
+      }
+      return expr;
+    }
+//STUDENT inserted comma support for challenge 6.1
     private Expr comma(){
       Expr expr = equality();
 

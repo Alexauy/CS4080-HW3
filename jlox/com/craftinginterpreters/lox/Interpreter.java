@@ -242,6 +242,18 @@ class Interpreter implements Expr.Visitor<Object>,
   }
 //< Control Flow visit-while
 //> Statements and State visit-assign
+
+  @Override
+  public Object visitConditionalExpr(Expr.Conditional expr){
+      Object condition = evaluate(expr.condition);
+
+      if(isTruthy(condition)){
+          return evaluate(expr.thenBranch);
+      }else{
+          return evaluate(expr.elseBranch);
+      }
+  }
+
   @Override
   public Object visitAssignExpr(Expr.Assign expr) {
     Object value = evaluate(expr.value);
