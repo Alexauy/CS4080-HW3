@@ -1,6 +1,2 @@
-fun comma(a, b) {
-  print a;
-  print b;
-}
-
-comma(6, 7);
+print "scone" + 4;
+print "scone";
