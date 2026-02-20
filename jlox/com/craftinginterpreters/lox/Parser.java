@@ -514,6 +514,32 @@ class Parser {
       consume(RIGHT_PAREN, "Expect ')' after expression.");
       return new Expr.Grouping(expr);
     }
+
+    //STUDENT added for challenge 6.3, binary error productions
+    if(match(BANG_EQUAL, EQUAL_EQUAL)){
+        error(previous(), "Missing left-hand operand.");
+        equality();
+        return new Expr.Literal(null);
+    }
+
+    if(match(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)){
+        error(previous(), "Missing left-hand operand.");
+        comparison();
+        return new Expr.Literal(null);
+    }
+
+    if(match(PLUS)){
+        error(previous(), "Missing left-hand operand.");
+        term();
+        return new Expr.Literal(null);
+    }
+
+    if(match(SLASH, STAR)){
+        error(previous(), "Missing left-hand operand");
+        factor();
+        return new Expr.Literal(null);
+    }
+
 //> primary-error
 
     throw error(peek(), "Expect expression.");
